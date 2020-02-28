@@ -150,10 +150,10 @@ Resources:
     Type: 'AWS::EC2::Instance'
     Properties:
       InstanceType: !Ref InstanceType
-      SecurityGroups: !Ref InstanceSecurityGroup
+      SecurityGroupId: [!Ref "InstanceSecurityGroup.GroupId"]
       KeyName: !Ref KeyName
       ImageId: ami-050b8344d77081f4b
-      SubnetId: !Ref VpcCIDR
+      SubnetId: !Ref PublicSubnet1
       
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -167,6 +167,7 @@ Resources:
       - IpProtocol: tcp
         FromPort: '80'
         ToPort: '80'
+        
   ElasticLoadBalancer:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
     Properties:
